@@ -16,13 +16,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ListaPage(),
+      home: ListaPage(),
     );
   }
 }
 
 class ListaPage extends StatelessWidget {
-  const ListaPage({super.key});
+  List<Contato> contatos = [
+    Contato(email: 'gabriel@hotmail.com',nome: 'Gabriel Corinthians'),
+    Contato(email: 'isabella@hotmail.com',nome: 'Isabella Corinthians'),
+    Contato(email: 'analucia@hotmail.com',nome: 'Ana Corinthians'),
+    Contato(email: 'wilson@hotmail.com',nome: 'Wilson Palmeiras'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +35,24 @@ class ListaPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ListView'),
       ),
+      body: ListView.builder(
+        itemCount: contatos.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            leading: CircleAvatar(
+              child: Text(contatos[index].nome[1]),
+            ),
+            title: Text(contatos[index].nome),
+            subtitle: Text(contatos[index].email),
+          );
+        },
+      ),
     );
   }
+}
+
+class Contato {
+  final String nome;
+  final String email;
+  const Contato({required this.nome, required this.email});
 }
